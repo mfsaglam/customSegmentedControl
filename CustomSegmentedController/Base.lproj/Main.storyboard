@@ -16,23 +16,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ouj-rd-btM" customClass="CustomSegmentedControl" customModule="CustomSegmentedController" customModuleProvider="target">
-                                <rect key="frame" x="20" y="84" width="374" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ouj-rd-btM" customClass="CustomSegmentedControl" customModule="CustomSegmentedController" customModuleProvider="target">
+                                <rect key="frame" x="20" y="84" width="374" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HBg-rm-wGr"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="13"/>
+                                        <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="commaSeperatedButtonTitles" value="First,Second,Third"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="commaSeperatedButtonTitles" value="FirstButton,SecondButtın,ThirdButton"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ouj-rd-btM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="9cM-nf-LYA"/>
+                            <constraint firstItem="Ouj-rd-btM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ASJ-id-4Mf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ouj-rd-btM" secondAttribute="trailing" constant="20" id="wpk-iJ-kCl"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

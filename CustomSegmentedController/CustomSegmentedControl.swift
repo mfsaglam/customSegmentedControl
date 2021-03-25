@@ -88,9 +88,13 @@ class CustomSegmentedControl: UIView {
     }
     
     @objc func buttonTapped(button: UIButton) {
-        for btn in buttons {
+        for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(buttonColor, for: .normal)
             if btn == button {
+                let selectorStartPosition = frame.width / CGFloat(buttons.count) * CGFloat(buttonIndex)
+                UIView.animate(withDuration: 0.3) {
+                    self.selector.frame.origin.x = selectorStartPosition
+                }
                 btn.setTitleColor(selectorTextColor, for: .normal)
             }
         }
