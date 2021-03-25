@@ -29,8 +29,11 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="commaSeperatedButtonTitles" value="FirstButton,SecondButtın,ThirdButton"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="commaSeperatedButtonTitles" value="First Button,Second Button,Third Button"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="segmentSelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="rXg-xa-N5R"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -41,6 +44,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ouj-rd-btM" secondAttribute="trailing" constant="20" id="wpk-iJ-kCl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="Ouj-rd-btM" id="MVF-Us-NgR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,14 +8,22 @@
 import UIKit
 
 @IBDesignable
-class CustomSegmentedControl: UIView {
+class CustomSegmentedControl: UIControl {
     
+    var selectedSegmentIndex = 0
     var buttons = [UIButton]()
     var selector: UIView!
+    
     @IBInspectable
     var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
+        }
+    }
+    
+    var selectorStyle: SelectorStyle = .rounded {
+        didSet {
+            updateView()
         }
     }
     
@@ -54,6 +62,26 @@ class CustomSegmentedControl: UIView {
         }
     }
     
+    func setSelector() {
+        switch selectorStyle {
+        case .rounded:
+            let selectorWidth = frame.width / CGFloat(buttons.count)
+            selector = UIView(frame: CGRect(x: 0, y: 0, width: selectorWidth, height: frame.height))
+            selector.layer.cornerRadius = selector.frame.height / 2
+            selector.backgroundColor = selectorColor
+            addSubview(selector)
+        case .underBar:
+            borderWidth = 0
+            let selectorWidth = frame.width / CGFloat(buttons.count)
+            let selectorHeight = frame.height * 0.1
+            selector = UIView(frame: CGRect(x: 0, y: frame.height - selectorHeight, width: selectorWidth, height: selectorHeight))
+            selector.backgroundColor = selectorColor
+            addSubview(selector)
+        case .highlightedOnly:
+            borderWidth = 0
+        }
+    }
+    
     func updateView() {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
@@ -65,16 +93,12 @@ class CustomSegmentedControl: UIView {
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)
         }
-        let selectorWidth = frame.width / CGFloat(buttons.count)
-        selector = UIView(frame: CGRect(x: 0, y: 0, width: selectorWidth, height: frame.height))
-        selector.layer.cornerRadius = selector.frame.height / 2
-        selector.backgroundColor = selectorColor
-        addSubview(selector)
+        setSelector()
         
         let sv = UIStackView(arrangedSubviews: buttons)
         sv.axis = .horizontal
         sv.alignment = .fill
-        sv.distribution = .fillProportionally
+        sv.distribution = .fillEqually
         addSubview(sv)
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -91,6 +115,7 @@ class CustomSegmentedControl: UIView {
         for (buttonIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(buttonColor, for: .normal)
             if btn == button {
+                selectedSegmentIndex = buttonIndex
                 let selectorStartPosition = frame.width / CGFloat(buttons.count) * CGFloat(buttonIndex)
                 UIView.animate(withDuration: 0.3) {
                     self.selector.frame.origin.x = selectorStartPosition
@@ -98,5 +123,12 @@ class CustomSegmentedControl: UIView {
                 btn.setTitleColor(selectorTextColor, for: .normal)
             }
         }
+        sendActions(for: .valueChanged)
     }
+}
+
+enum SelectorStyle {
+    case rounded
+    case underBar
+    case highlightedOnly
 }
